@@ -14,11 +14,11 @@ function rename (basePath, oldName, newName, cb) {
 function moveHelpers (frameworksPath, appName, callback) {
   series([' Helper', ' Helper EH', ' Helper NP'].map(function (suffix) {
     return function (cb) {
-      var executableBasePath = path.join(frameworksPath, `Electron${suffix}.app`, 'Contents', 'MacOS')
+      var executableBasePath = path.join(frameworksPath, `Brave${suffix}.app`, 'Contents', 'MacOS')
 
-      rename(executableBasePath, `Electron${suffix}`, appName + suffix, function (err) {
+      rename(executableBasePath, `Brave${suffix}`, appName + suffix, function (err) {
         if (err) return cb(err)
-        rename(frameworksPath, `Electron${suffix}.app`, `${appName}${suffix}.app`, cb)
+        rename(frameworksPath, `Brave${suffix}.app`, `${appName}${suffix}.app`, cb)
       })
     }
   }), function (err) {
@@ -58,16 +58,16 @@ function createSignOpts (properties, platform, app) {
 
 module.exports = {
   createApp: function createApp (opts, templatePath, callback) {
-    var appRelativePath = path.join('Electron.app', 'Contents', 'Resources', 'app')
+    var appRelativePath = path.join('Brave.app', 'Contents', 'Resources', 'app')
     common.initializeApp(opts, templatePath, appRelativePath, function buildMacApp (err, tempPath) {
       if (err) return callback(err)
 
-      var contentsPath = path.join(tempPath, 'Electron.app', 'Contents')
+      var contentsPath = path.join(tempPath, 'Brave.app', 'Contents')
       var frameworksPath = path.join(contentsPath, 'Frameworks')
       var appPlistFilename = path.join(contentsPath, 'Info.plist')
-      var helperPlistFilename = path.join(frameworksPath, 'Electron Helper.app', 'Contents', 'Info.plist')
-      var helperEHPlistFilename = path.join(frameworksPath, 'Electron Helper EH.app', 'Contents', 'Info.plist')
-      var helperNPPlistFilename = path.join(frameworksPath, 'Electron Helper NP.app', 'Contents', 'Info.plist')
+      var helperPlistFilename = path.join(frameworksPath, 'Brave Helper.app', 'Contents', 'Info.plist')
+      var helperEHPlistFilename = path.join(frameworksPath, 'Brave Helper EH.app', 'Contents', 'Info.plist')
+      var helperNPPlistFilename = path.join(frameworksPath, 'Brave Helper NP.app', 'Contents', 'Info.plist')
       var appPlist = plist.parse(fs.readFileSync(appPlistFilename).toString())
       var helperPlist = plist.parse(fs.readFileSync(helperPlistFilename).toString())
       var helperEHPlist = plist.parse(fs.readFileSync(helperEHPlistFilename).toString())
@@ -169,9 +169,9 @@ module.exports = {
         })
       }
 
-      // Rename the Contents/MacOS/Electron binary
+      // Rename the Contents/MacOS/Brave binary
       operations.push(function (cb) {
-        rename(path.join(contentsPath, 'MacOS'), 'Electron', appPlist.CFBundleExecutable, cb)
+        rename(path.join(contentsPath, 'MacOS'), 'Brave', appPlist.CFBundleExecutable, cb)
       })
 
       // Move Helper apps/executables, then top-level .app

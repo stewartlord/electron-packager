@@ -145,7 +145,7 @@ function createExtendInfoTest (baseOpts, extraPath) {
         t.equal(obj.CFBundleVersion, opts['build-version'], 'CFBundleVersion should reflect build-version argument')
         t.equal(obj.CFBundleIdentifier, 'com.electron.extratest', 'CFBundleIdentifier should reflect app-bundle-id argument')
         t.equal(obj.LSApplicationCategoryType, 'public.app-category.music', 'LSApplicationCategoryType should reflect app-category-type argument')
-        t.equal(obj.CFBundlePackageType, 'APPL', 'CFBundlePackageType should be Electron default')
+        t.equal(obj.CFBundlePackageType, 'APPL', 'CFBundlePackageType should be Brave default')
         cb()
       }
     ], function (err) {
@@ -265,16 +265,16 @@ function createAppBundleFrameworkTest (baseOpts) {
       function (cb) {
         packager(baseOpts, cb)
       }, function (paths, cb) {
-        frameworkPath = path.join(paths[0], `${baseOpts.name}.app`, 'Contents', 'Frameworks', 'Electron Framework.framework')
+        frameworkPath = path.join(paths[0], `${baseOpts.name}.app`, 'Contents', 'Frameworks', 'Brave Framework.framework')
         fs.stat(frameworkPath, cb)
       }, function (stats, cb) {
-        t.true(stats.isDirectory(), 'Expected Electron Framework.framework to be a directory')
-        fs.lstat(path.join(frameworkPath, 'Electron Framework'), cb)
+        t.true(stats.isDirectory(), 'Expected Brave Framework.framework to be a directory')
+        fs.lstat(path.join(frameworkPath, 'Brave Framework'), cb)
       }, function (stats, cb) {
-        t.true(stats.isSymbolicLink(), 'Expected Electron Framework.framework/Electron Framework to be a symlink')
+        t.true(stats.isSymbolicLink(), 'Expected Brave Framework.framework/Brave Framework to be a symlink')
         fs.lstat(path.join(frameworkPath, 'Versions', 'Current'), cb)
       }, function (stats, cb) {
-        t.true(stats.isSymbolicLink(), 'Expected Electron Framework.framework/Versions/Current to be a symlink')
+        t.true(stats.isSymbolicLink(), 'Expected Brave Framework.framework/Versions/Current to be a symlink')
         cb()
       }
     ], function (err) {

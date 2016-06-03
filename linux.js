@@ -8,7 +8,7 @@ module.exports = {
   createApp: function createApp (opts, templatePath, callback) {
     common.initializeApp(opts, templatePath, path.join('resources', 'app'), function buildLinuxApp (err, tempPath) {
       if (err) return callback(err)
-      fs.move(path.join(tempPath, 'electron'), path.join(tempPath, opts.name), function (err) {
+      fs.move(path.join(tempPath, 'brave'), path.join(tempPath, opts.name), function (err) {
         if (err) return callback(err)
         common.moveApp(opts, tempPath, callback)
       })
