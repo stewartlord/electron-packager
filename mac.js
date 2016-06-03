@@ -8,7 +8,11 @@ const series = require('run-series')
 const sign = require('electron-osx-sign')
 
 function rename (basePath, oldName, newName, cb) {
-  fs.move(path.join(basePath, oldName), path.join(basePath, newName), cb)
+  if (oldName !== newName) {
+    fs.move(path.join(basePath, oldName), path.join(basePath, newName), cb)
+  } else {
+    cb()
+  }
 }
 
 function moveHelpers (frameworksPath, appName, callback) {
@@ -179,7 +183,11 @@ module.exports = {
       operations.push(function (cb) {
         moveHelpers(frameworksPath, opts.name, cb)
       }, function (cb) {
-        fs.move(path.dirname(contentsPath), finalAppPath, cb)
+        if (path.dirname(contentsPath) !== finalAppPath) {
+          fs.move(path.dirname(contentsPath), finalAppPath, cb)
+        } else {
+          cb()
+        }
       })
 
       if ((opts.platform === 'all' || opts.platform === 'mas') && opts['osx-sign'] === undefined) {
