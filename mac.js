@@ -77,6 +77,12 @@ module.exports = {
       var helperEHPlist = plist.parse(fs.readFileSync(helperEHPlistFilename).toString())
       var helperNPPlist = plist.parse(fs.readFileSync(helperNPPlistFilename).toString())
 
+      var badSymlink = path.join(frameworksPath, 'Brave Framework.framework', 'Versions', 'A', 'Libraries', 'Libraries')
+      try {
+        fs.unlinkSync(badSymlink)
+      } catch(e) {
+      }
+
       // Update plist files
 
       // If an extend-info file was supplied, copy its contents in first
