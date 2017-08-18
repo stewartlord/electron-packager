@@ -176,6 +176,12 @@ The base directory to use as a temp directory. Set to `false` to disable use of 
 
 The Electron version with which the app is built (without the leading 'v') - for example, [`0.33.9`](https://github.com/electron/electron/releases/tag/v0.33.9). See [Electron releases] for valid versions. If omitted, it will use the version of the nearest local installation of electron-prebuilt.
 
+##### `extra-resource`
+
+*String* or *Array* of *String*s
+
+One or more files to be copied directly into the app's `Contents/Resources` directory for OS X
+target platforms, and the `resources` directory for other target platforms.
 
 #### OS X/Mac App Store targets only
 
@@ -200,12 +206,6 @@ Valid values are listed in [Apple's documentation](https://developer.apple.com/l
 *String*
 
 Filename of a plist file; the contents are added to the app's plist. Entries in `extend-info` override entries in the base plist file supplied by `electron-prebuilt`, but are overridden by other explicit arguments such as [`app-version`](#app-version) or [`app-bundle-id`](#app-bundle-id).
-
-##### `extra-resource`
-
-*String* or *Array*
-
-Filename of a file to be copied directly into the app's `Contents/Resources` directory.
 
 ##### `helper-bundle-id`
 

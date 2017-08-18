@@ -40,6 +40,7 @@ download           a list of sub-options to pass to electron-download. They are 
                    - mirror: alternate URL to download Electron zips
                    - strictSSL: whether SSL certs are required to be valid when downloading
                      Electron. Defaults to true, use --download.strictSSL=false to disable checks.
+extra-resource     files or folders to copy into the app's resources directory
 icon               the icon file to use as the icon for the app. Note: Format depends on platform.
 ignore             do not copy files into app whose filenames regex .match this string
 out                the dir to put the app into at the end. defaults to current working dir
@@ -61,7 +62,6 @@ app-category-type  the application category type
                    For example, `app-category-type=public.app-category.developer-tools` will set the
                    application category to 'Developer Tools'.
 extend-info        a plist file to append to the app plist
-extra-resource     a file to copy into the app's Contents/Resources
 helper-bundle-id   bundle identifier to use in the app helper plist
 osx-sign           (OSX host platform only) Whether to sign the OSX app packages. You can either
                    pass --osx-sign by itself to use the default configuration, or use dot notation

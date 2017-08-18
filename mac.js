@@ -168,17 +168,6 @@ module.exports = {
         })
       }
 
-      // Copy in any other extras
-      var extras = opts['extra-resource']
-      if (extras) {
-        if (!Array.isArray(extras)) extras = [extras]
-        extras.forEach(function (val) {
-          operations.push(function (cb) {
-            fs.copy(val, path.join(contentsPath, 'Resources', path.basename(val)), cb)
-          })
-        })
-      }
-
       // Rename the Contents/MacOS/Brave binary
       operations.push(function (cb) {
         rename(path.join(contentsPath, 'MacOS'), 'Brave', appPlist.CFBundleExecutable, cb)

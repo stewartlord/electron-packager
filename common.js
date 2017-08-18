@@ -64,6 +64,16 @@ function asarApp (appPath, asarOptions, cb) {
   })
 }
 
+function copyExtraResources (operations, resourcesPath, extraResources) {
+  if (!Array.isArray(extraResources)) extraResources = [extraResources]
+
+  for (const resource of extraResources) {
+    operations.push(cb => {
+      fs.copy(resource, path.join(resourcesPath, path.basename(resource)), cb)
+    })
+  }
+}
+
 function generateFinalBasename (opts) {
   return `${opts.name}-${opts.platform}-${opts.arch}`
 }
@@ -217,6 +227,10 @@ module.exports = {
         }
         asarApp(path.join(appPath), asarOptions, cb)
       })
+    }
+
+    if (opts.extraResource) {
+      copyExtraResources(operations, resourcesPath, opts.extraResource)
     }
 
     series(operations, function (err) {
